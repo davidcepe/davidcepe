@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Learning Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#a855f7;
+  --secondary:#c084fc;
+  --bg-dark:#0b061f;
+  --card:rgba(255,255,255,0.05);
+  --text:#f5f3ff;
+  --hover-card:#1a0a33;
+}
+
+*{
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: radial-gradient(circle at top left,#1e0b3b,#0b061f 65%);
+  color:var(--text);
+  padding:20px;
+  line-height:1.8;
+  overflow-x:hidden;
+  opacity:0;
+  animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{to{opacity:1;}}
+
+/* SIDEBAR */
+.sidebar {
+  float: left;
+  width: 220px;
+  background: rgba(20,10,50,0.95);
+  padding: 20px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.5);
+  margin-right: 40px; 
+}
+
+.sidebar h2 {
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.sidebar a {
+  display: block;
+  color: #ddd;
+  text-decoration: none;
+  margin: 8px 0;
+  transition: 0.3s;
+  font-size: 0.95rem;
+}
+
+.sidebar a:hover {
+  color: var(--secondary);
+  transform: translateX(5px);
+}
+
+/* CONTAINER ADJUSTMENT */
+.container {
+  max-width: 950px;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:10px 18px;
+  background:var(--card);
+  color:var(--primary);
+  font-weight:600;
+  border-radius:12px;
+  border:1px solid rgba(168,85,247,0.5);
+  text-decoration:none;
+  margin-bottom:30px;
+  transition:0.4s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.back-btn:hover{
+  background:var(--primary);
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+/* HEADINGS */
+h1{
+  color:var(--primary);
+  font-size:2.8rem;
+  border-bottom:2px solid var(--primary);
+  padding-bottom:10px;
+  margin-bottom:30px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+h2{
+  color:var(--secondary);
+  margin-top:15px;
+  font-size:1.8rem;
+}
+
+/* LESSON CARDS */
+.lesson{
+  background:var(--card);
+  padding:28px 25px;
+  border-radius:22px;
+  margin-bottom:28px;
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(8px);
+  transition:0.3s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.lesson:hover{
+  transform:translateY(-4px);
+  border-color:var(--secondary);
+}
+
+/* CODE BLOCK */
+code{
+  display:block;
+  background:rgba(0,0,0,0.85);
+  padding:14px;
+  margin-top:12px;
+  border-radius:10px;
+  color:#c084fc;
+  font-family:monospace;
+  white-space:pre-wrap;
+  font-size:0.95rem;
+  box-shadow: 0 3px 8px rgba(192,132,252,0.2);
+}
+
+/* TIP BOX */
+.tip{
+  background:rgba(168,85,247,0.12);
+  padding:14px;
+  border-left:5px solid var(--primary);
+  margin-top:18px;
+  border-radius:10px;
+  font-style:italic;
+}
+
+/* TABLE OF CONTENTS */
+.toc{
+  background:var(--card);
+  padding:22px;
+  border-radius:18px;
+  margin-bottom:35px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.toc a{
+  display:block;
+  color:#ddd;
+  text-decoration:none;
+  margin:7px 0;
+  transition:0.3s;
+}
+.toc a:hover{
+  color:var(--secondary);
+  transform:translateX(6px);
+}
+
+/* RESOURCE CARDS */
+.resources{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:25px;
+}
+.resource-card{
+  background:var(--card);
+  padding:20px;
+  border-radius:15px;
+  text-decoration:none;
+  color:white;
+  border:1px solid rgba(255,255,255,0.1);
+  transition:0.4s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+.resource-card:hover{
+  transform:translateY(-5px);
+  border-color:var(--secondary);
+  background:var(--hover-card);
+}
+
+/* FLOATING LIGHTS */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  filter:blur(140px);
+  z-index:-1;
+  animation:float 14s ease-in-out infinite alternate;
+}
+body::before{background:#9333ea55;top:-180px;left:-180px;}
+body::after{background:#c084fc44;bottom:-180px;right:-180px;}
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(45px);}
+}
+
+/* LINKS */
+a{
+  color:var(--primary);
+  text-decoration:underline;
+  transition:0.3s;
+}
+a:hover{
+  color:var(--secondary);
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width:800px){
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    box-shadow: none;
+    margin-bottom: 25px;
+  }
+  .container {
+    padding-left: 0;
+  }
+}
+@media (max-width:600px){
+  h1{font-size:2.2rem;}
+  h2{font-size:1.5rem;}
+  .lesson{padding:20px;}
+  .resource-card{padding:16px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Lessons</h2>
+  <a href="#intro">Introduction</a>
+  <a href="#variables">Variables & Data Types</a>
+  <a href="#functions">Functions</a>
+  <a href="#loops">Loops</a>
+  <a href="#arrays">Arrays & Vectors</a>
+  <a href="#pointers">Pointers</a>
+  <a href="#classes">Classes & Objects</a>
+  <a href="#inheritance">Inheritance</a>
+  <a href="#exceptions">Exception Handling</a>
+  <a href="#projects">Mini Projects</a>
+  <a href="#resources">Resources</a>
+</div>
+
+<div class="container">
+
+<a href="index.html" class="back-btn">⬅ Back</a>
+
+<h1>💻 C++ Programming Learning Hub</h1>
+
+<!-- LESSONS -->
+
+<div class="lesson" id="intro">
+<h2>Introduction to C++</h2>
+<p>C++ is a powerful, high-performance programming language used for system/software development, game development, and competitive programming. Start with basic programs to understand syntax, input/output, and structure.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=vLnPwxZdW4Y" target="_blank">C++ Full Course for Beginners</a></p>
+</div>
+
+<div class="lesson" id="variables">
+<h2>Variables & Data Types</h2>
+<p>Variables store data. Examples: <code>int age = 16;</code>, <code>double price = 19.99;</code>, <code>char grade = 'A';</code>. Learn about <code>int</code>, <code>float</code>, <code>double</code>, <code>char</code>, <code>bool</code>, and <code>string</code>.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=1v_4dL8l8pQ" target="_blank">C++ Variables Tutorial</a></p>
+</div>
+
+<div class="lesson" id="functions">
+<h2>Functions</h2>
+<p>Functions are reusable code blocks. Example: <code>int add(int a, int b){ return a+b; }</code>. Functions can take parameters and return values, organizing your code efficiently.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=8jLOx1hD3_o" target="_blank">C++ Functions Tutorial</a></p>
+</div>
+
+<div class="lesson" id="loops">
+<h2>Loops</h2>
+<p>Loops repeat code: <code>for(int i=0;i<5;i++){ std::cout &lt;&lt; i &lt;&lt; std::endl; }</code>. C++ supports <code>for</code>, <code>while</code>, and <code>do...while</code> loops.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=8jLOx1hD3_o" target="_blank">C++ Loops Tutorial</a></p>
+</div>
+
+<div class="lesson" id="arrays">
+<h2>Arrays & Vectors</h2>
+<p>Arrays store fixed-size data: <code>int arr[5] = {1,2,3,4,5};</code>. Vectors are dynamic arrays: <code>std::vector&lt;int&gt; v = {1,2,3};</code>. Loop through them to process elements.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=JxmyE5tw0_M" target="_blank">C++ Arrays & Vectors Tutorial</a></p>
+</div>
+
+<div class="lesson" id="pointers">
+<h2>Pointers</h2>
+<p>Pointers store memory addresses: <code>int x = 10; int *ptr = &x;</code>. They allow efficient memory management and dynamic allocation.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=zuegQmMdy8M" target="_blank">C++ Pointers Tutorial</a></p>
+</div>
+
+<div class="lesson" id="classes">
+<h2>Classes & Objects</h2>
+<p>Classes define objects: <code>class Person { public: string name; int age; };</code>. Objects are instances of classes: <code>Person p; p.name = "Alex";</code>. Encapsulation and constructors are key concepts.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=1v_4dL8l8pQ" target="_blank">C++ Classes Tutorial</a></p>
+</div>
+
+<div class="lesson" id="inheritance">
+<h2>Inheritance</h2>
+<p>Inheritance allows one class to acquire properties of another: <code>class Student: public Person { int grade; };</code>. Polymorphism and virtual functions are important for OOP.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=1v_4dL8l8pQ" target="_blank">C++ Inheritance Tutorial</a></p>
+</div>
+
+<div class="lesson" id="exceptions">
+<h2>Exception Handling</h2>
+<p>Handle runtime errors with <code>try { } catch(...) { }</code>. Example: <code>try{ int x = arr[5]; } catch(std::exception &e){ std::cout &lt;&lt; e.what(); }</code>.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=8jLOx1hD3_o" target="_blank">C++ Exception Handling Tutorial</a></p>
+</div>
+
+<div class="lesson" id="projects">
+<h2>Mini Projects</h2>
+<p>Create projects like a calculator, simple games, or student management systems. Practice functions, OOP, arrays, and pointers for hands-on learning.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=vLnPwxZdW4Y" target="_blank">C++ Projects Tutorial</a></p>
+</div>
+
+<div class="lesson" id="resources">
+<h2>Additional Resources</h2>
+<p>Learn C++ further: <a href="https://www.learncpp.com/" target="_blank">LearnCpp.com</a>, <a href="https://www.w3schools.com/cpp/" target="_blank">W3Schools C++</a>, <a href="https://www.tutorialspoint.com/cplusplus/index.htm" target="_blank">TutorialsPoint C++</a>, <a href="https://www.freecodecamp.org/" target="_blank">FreeCodeCamp C++</a>.</p>
+</div>
+
+</div>
+</body>
+</html>

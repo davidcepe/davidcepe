@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | CSS PETA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg-dark:#0b061f;
+  --card:rgba(255,255,255,0.05);
+  --primary:#a855f7;
+  --text:#f5f3ff;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:radial-gradient(circle at top left,#1e0b3b,#0b061f 60%);
+  color:var(--text);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  opacity:0;
+  animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+/* FLOATING GLOW BACKGROUND */
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  filter:blur(120px);
+  z-index:-1;
+  animation:float 12s ease-in-out infinite alternate;
+}
+
+body::before{
+  background:#9333ea55;
+  top:-150px;
+  left:-150px;
+}
+
+body::after{
+  background:#c084fc44;
+  bottom:-150px;
+  right:-150px;
+  animation-delay:4s;
+}
+
+@keyframes float{
+  from{transform:translateY(0px);}
+  to{transform:translateY(40px);}
+}
+
+/* HOME BUTTON (upper right) */
+
+.nav-home{
+  position:fixed;
+  top:20px;
+  right:30px;
+  padding:10px 20px;
+  border:1px solid var(--primary);
+  border-radius:10px;
+  background:transparent;
+  color:var(--text);
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+  z-index:10;
+}
+
+.nav-home:hover{
+  background:var(--primary);
+  color:black;
+  box-shadow:0 0 20px #a855f7;
+}
+
+/* REGISTER CARD */
+
+form{
+  background:var(--card);
+  backdrop-filter:blur(20px);
+  padding:2.5rem;
+  border-radius:25px;
+  border:1px solid rgba(255,255,255,0.08);
+  width:340px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 40px #a855f744;
+}
+
+/* SLIDING LIGHT EFFECT */
+
+form::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-200%;
+  width:200%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.2),
+    transparent 70%
+  );
+  transform:skewX(-20deg);
+  transition:0.8s;
+}
+
+form:hover::before{
+  left:200%;
+}
+
+/* TITLE */
+
+.glowTitle{
+  font-size:32px;
+  font-weight:600;
+  margin-bottom:10px;
+  background:linear-gradient(90deg,#c084fc,#a855f7);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* MESSAGE */
+
+#registerMsg{
+  font-size:18px;
+  font-weight:600;
+  opacity:0;
+  transition:opacity 0.5s;
+  margin-bottom:10px;
+}
+
+/* INPUTS */
+
+input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.05);
+  color:white;
+  font-family:'Poppins',sans-serif;
+  transition:0.3s;
+}
+
+input:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 15px #a855f7;
+}
+
+/* BUTTONS */
+
+.glowButton{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  font-family:'Poppins',sans-serif;
+  margin-top:10px;
+  background:linear-gradient(90deg,#c084fc,#a855f7);
+  color:white;
+  transition:0.3s;
+}
+
+.glowButton:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 20px #a855f7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME BUTTON -->
+<button class="nav-home" onclick="window.location.href='index.html'">Home</button>
+
+<form id="registerForm">
+
+<div id="registerMsg">Register message</div>
+
+<h2 class="glowTitle">Register</h2>
+
+<input type="email" id="username" placeholder="Email" required>
+<input type="password" id="password" placeholder="Password" required>
+<input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+
+<button type="submit" class="glowButton">Register</button>
+<br><br>
+<button type="button" id="loginBtn" class="glowButton">Login</button>
+
+</form>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyA4BMduzAUiqHMNCoha_DsDmBGnYeBz3Ww",
+  authDomain: "css-peta.firebaseapp.com",
+  projectId: "css-peta",
+  storageBucket: "css-peta.firebasestorage.app",
+  messagingSenderId: "470969817365",
+  appId: "1:470969817365:web:7ef0585687c1cb7cbdb11c",
+  measurementId: "G-Z5J2E9VN6B"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+const registerForm = document.getElementById("registerForm");
+const registerMsg = document.getElementById("registerMsg");
+
+registerForm.addEventListener("submit", function(e){
+  e.preventDefault();
+  registerMsg.style.opacity = 0;
+  const email = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value;
+  const confirm = document.getElementById("confirmPassword").value;
+
+  if(password !== confirm){
+    registerMsg.style.color = "#ff4d6d";
+    registerMsg.textContent = "Passwords do not match!";
+    registerMsg.style.opacity = 1;
+    return;
+  }
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      registerMsg.style.color = "#00ff88";
+      registerMsg.textContent = "Register successful!";
+      registerMsg.style.opacity = 1;
+      setTimeout(() => window.location.href = "login.html", 2000);
+    })
+    .catch(error => {
+      registerMsg.style.opacity = 1;
+      registerMsg.style.color = "#ff4d6d";
+      switch(error.code){
+        case "auth/email-already-in-use":
+          registerMsg.textContent = "Email already registered!";
+          break;
+        case "auth/weak-password":
+          registerMsg.textContent = "Password too weak!";
+          break;
+        case "auth/invalid-email":
+          registerMsg.textContent = "Invalid email!";
+          break;
+        default:
+          registerMsg.textContent = error.message;
+      }
+    });
+});
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+  window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

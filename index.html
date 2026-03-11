@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS PETA | Home</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg-dark:#0b061f;
+--card:rgba(255,255,255,0.05);
+--primary:#a855f7;
+--text:#f5f3ff;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:radial-gradient(circle at top left,#1e0b3b,#0b061f 60%);
+color:var(--text);
+overflow-x:hidden;
+opacity:0;
+animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+/* FLOATING GLOW BACKGROUND */
+
+body::before,
+body::after{
+content:"";
+position:fixed;
+width:500px;
+height:500px;
+border-radius:50%;
+filter:blur(120px);
+z-index:-1;
+animation:float 12s ease-in-out infinite alternate;
+}
+
+body::before{
+background:#9333ea55;
+top:-150px;
+left:-150px;
+}
+
+body::after{
+background:#c084fc44;
+bottom:-150px;
+right:-150px;
+animation-delay:4s;
+}
+
+@keyframes float{
+from{transform:translateY(0px);}
+to{transform:translateY(40px);}
+}
+
+/* HEADER */
+
+header{
+text-align:center;
+padding:3rem 1rem 2rem;
+position:relative;
+}
+
+.title{
+font-size:3.5rem;
+background:linear-gradient(90deg,#c084fc,#a855f7);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+letter-spacing:2px;
+}
+
+.subtitle{
+opacity:0.7;
+margin-top:0.5rem;
+}
+
+/* NAV BUTTONS */
+
+.nav{
+position:absolute;
+top:20px;
+right:30px;
+display:flex;
+gap:15px;
+}
+
+.nav button{
+background:transparent;
+border:1px solid var(--primary);
+color:white;
+padding:8px 14px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-family:'Poppins',sans-serif;
+}
+
+.nav button:hover{
+background:var(--primary);
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:2.5rem;
+padding:3rem;
+max-width:1200px;
+margin:auto;
+align-items:stretch;
+}
+
+/* CARD */
+
+.card{
+background:var(--card);
+backdrop-filter:blur(20px);
+border-radius:25px;
+padding:2.5rem 2rem;
+border:1px solid rgba(255,255,255,0.08);
+position:relative;
+overflow:hidden;
+cursor:pointer;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+height:100%;
+min-height:260px;
+
+text-align:center;
+
+transition:
+transform 0.4s cubic-bezier(.4,2,.6,1),
+box-shadow 0.4s ease,
+border 0.4s ease;
+}
+
+/* SHINE EFFECT */
+
+.card::before{
+content:"";
+position:absolute;
+width:200%;
+height:100%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.1),
+transparent
+);
+transform:translateX(-100%);
+transition:0.6s;
+}
+
+.card:hover::before{
+transform:translateX(100%);
+}
+
+/* HOVER */
+
+.card:hover{
+transform:translateY(-12px) scale(1.04);
+border:1px solid var(--primary);
+box-shadow:0 0 40px #a855f766;
+}
+
+/* CLICK */
+
+.card:active{
+transform:scale(0.96);
+transition:transform 0.1s ease;
+}
+
+/* RIPPLE */
+
+.ripple{
+position:absolute;
+border-radius:50%;
+background:rgba(168,85,247,0.4);
+transform:scale(0);
+animation:ripple 0.6s linear;
+}
+
+@keyframes ripple{
+to{
+transform:scale(20);
+opacity:0;
+}
+}
+
+.card h2{
+margin:1rem 0 0.5rem;
+font-size:1.6rem;
+font-weight:600;
+}
+
+.card p{
+opacity:0.75;
+font-size:0.95rem;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+margin:2rem 0 1rem;
+opacity:0.7;
+font-size:0.95rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="nav" id="navButtons"></div>
+
+<div class="title">CSS PETA</div>
+<div class="subtitle">Select a module to start learning</div>
+
+</header>
+
+<div class="grid">
+
+<a href="python.html">
+<div class="card">
+<h2>Python</h2>
+<p>Easy and versatile programming.</p>
+</div>
+</a>
+
+<a href="java.html">
+<div class="card">
+<h2>Java</h2>
+<p>Cross-platform and object-oriented.</p>
+</div>
+</a>
+
+<a href="javascrpt.html">
+<div class="card">
+<h2>JavaScript</h2>
+<p>Interactive web development.</p>
+</div>
+</a>
+
+<a href="c.html">
+<div class="card">
+<h2>C#</h2>
+<p>LWindows apps and Unity games.</p>
+</div>
+</a>
+
+<a href="sql.html">
+<div class="card">
+<h2>SQL</h2>
+<p>Database queries and management.</p>
+</div>
+</a>
+
+<a href="c++.html">
+<div class="card">
+<h2>C++</h2>
+<p>LFast and system-level coding.</p>
+</div>
+</a>
+
+</div>
+
+<footer>Created by David Cepe, 12 Magpili</footer>
+
+<script>
+
+/* LOGIN / REGISTER NAV */
+
+const nav=document.getElementById("navButtons");
+const loggedIn=localStorage.getItem("loggedIn");
+
+if(loggedIn==="true"){
+
+const logoutBtn=document.createElement("button");
+logoutBtn.textContent="Logout";
+
+logoutBtn.onclick=()=>{
+localStorage.removeItem("loggedIn");
+window.location.href="login.html";
+};
+
+nav.appendChild(logoutBtn);
+
+}else{
+
+const loginBtn=document.createElement("button");
+loginBtn.textContent="Login";
+loginBtn.onclick=()=>{window.location.href="login.html";};
+
+const registerBtn=document.createElement("button");
+registerBtn.textContent="Register";
+registerBtn.onclick=()=>{window.location.href="reg.html";};
+
+nav.appendChild(loginBtn);
+nav.appendChild(registerBtn);
+
+}
+
+/* RIPPLE CLICK EFFECT */
+
+document.querySelectorAll(".card").forEach(card=>{
+card.addEventListener("click",function(e){
+
+const ripple=document.createElement("span");
+ripple.classList.add("ripple");
+
+const rect=this.getBoundingClientRect();
+
+ripple.style.left=(e.clientX-rect.left)+"px";
+ripple.style.top=(e.clientY-rect.top)+"px";
+ripple.style.width=ripple.style.height="20px";
+
+this.appendChild(ripple);
+
+setTimeout(()=>{
+ripple.remove();
+},600);
+
+});
+});
+
+</script>
+
+</body>
+</html>

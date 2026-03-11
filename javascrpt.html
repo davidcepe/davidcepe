@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Learning Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#a855f7; /* main purple */
+  --secondary:#c084fc; /* lighter purple accent */
+  --bg-dark:#0b061f;
+  --card:rgba(255,255,255,0.05);
+  --text:#f5f3ff;
+  --hover-card:#1a0a33;
+}
+
+*{
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: radial-gradient(circle at top left,#1e0b3b,#0b061f 65%);
+  color:var(--text);
+  padding:20px;
+  line-height:1.8;
+  overflow-x:hidden;
+  opacity:0;
+  animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{to{opacity:1;}}
+
+/* SIDEBAR */
+.sidebar {
+  float: left;
+  width: 220px;
+  background: rgba(20,10,50,0.95);
+  padding: 20px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.5);
+  margin-right: 40px; 
+}
+
+.sidebar h2 {
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.sidebar a {
+  display: block;
+  color: #ddd;
+  text-decoration: none;
+  margin: 8px 0;
+  transition: 0.3s;
+  font-size: 0.95rem;
+}
+
+.sidebar a:hover {
+  color: var(--secondary);
+  transform: translateX(5px);
+}
+
+/* CONTAINER ADJUSTMENT */
+.container {
+  max-width: 950px;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:10px 18px;
+  background:var(--card);
+  color:var(--primary);
+  font-weight:600;
+  border-radius:12px;
+  border:1px solid rgba(168,85,247,0.5);
+  text-decoration:none;
+  margin-bottom:30px;
+  transition:0.4s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.back-btn:hover{
+  background:var(--primary);
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+/* HEADINGS */
+h1{
+  color:var(--primary);
+  font-size:2.8rem;
+  border-bottom:2px solid var(--primary);
+  padding-bottom:10px;
+  margin-bottom:30px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+h2{
+  color:var(--secondary);
+  margin-top:15px;
+  font-size:1.8rem;
+}
+
+/* LESSON CARDS */
+.lesson{
+  background:var(--card);
+  padding:28px 25px;
+  border-radius:22px;
+  margin-bottom:28px;
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(8px);
+  transition:0.3s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.lesson:hover{
+  transform:translateY(-4px);
+  border-color:var(--secondary);
+}
+
+/* CODE BLOCK */
+code{
+  display:block;
+  background:rgba(0,0,0,0.85);
+  padding:14px;
+  margin-top:12px;
+  border-radius:10px;
+  color:#c084fc;
+  font-family:monospace;
+  white-space:pre-wrap;
+  font-size:0.95rem;
+  box-shadow: 0 3px 8px rgba(192,132,252,0.2);
+}
+
+/* TIP BOX */
+.tip{
+  background:rgba(168,85,247,0.12);
+  padding:14px;
+  border-left:5px solid var(--primary);
+  margin-top:18px;
+  border-radius:10px;
+  font-style:italic;
+}
+
+/* TABLE OF CONTENTS */
+.toc{
+  background:var(--card);
+  padding:22px;
+  border-radius:18px;
+  margin-bottom:35px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.toc a{
+  display:block;
+  color:#ddd;
+  text-decoration:none;
+  margin:7px 0;
+  transition:0.3s;
+}
+.toc a:hover{
+  color:var(--secondary);
+  transform:translateX(6px);
+}
+
+/* RESOURCE CARDS */
+.resources{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:25px;
+}
+.resource-card{
+  background:var(--card);
+  padding:20px;
+  border-radius:15px;
+  text-decoration:none;
+  color:white;
+  border:1px solid rgba(255,255,255,0.1);
+  transition:0.4s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+.resource-card:hover{
+  transform:translateY(-5px);
+  border-color:var(--secondary);
+  background:var(--hover-card);
+}
+
+/* FLOATING LIGHTS */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  filter:blur(140px);
+  z-index:-1;
+  animation:float 14s ease-in-out infinite alternate;
+}
+body::before{background:#9333ea55;top:-180px;left:-180px;}
+body::after{background:#c084fc44;bottom:-180px;right:-180px;}
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(45px);}
+}
+
+/* LINKS */
+a{
+  color:var(--primary);
+  text-decoration:underline;
+  transition:0.3s;
+}
+a:hover{
+  color:var(--secondary);
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width:800px){
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    box-shadow: none;
+    margin-bottom: 25px;
+  }
+  .container {
+    padding-left: 0;
+  }
+}
+@media (max-width:600px){
+  h1{font-size:2.2rem;}
+  h2{font-size:1.5rem;}
+  .lesson{padding:20px;}
+  .resource-card{padding:16px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Lessons</h2>
+  <a href="#intro">Introduction</a>
+  <a href="#variables">Variables</a>
+  <a href="#functions">Functions</a>
+  <a href="#loops">Loops</a>
+  <a href="#arrays">Arrays</a>
+  <a href="#objects">Objects</a>
+  <a href="#dom">DOM Manipulation</a>
+  <a href="#events">Events</a>
+  <a href="#es6">ES6 Features</a>
+  <a href="#fetch">Fetch API</a>
+  <a href="#async">Async/Await</a>
+  <a href="#projects">Mini Projects</a>
+  <a href="#resources">Resources</a>
+</div>
+
+<div class="container">
+
+<a href="index.html" class="back-btn">⬅ Back</a>
+
+<h1>💻 JavaScript Programming Learning Hub</h1>
+
+<!-- LESSONS -->
+
+<div class="lesson" id="intro">
+<h2>Introduction to JavaScript</h2>
+<p>JavaScript is a versatile, high-level programming language used to create interactive web pages, apps, and servers. It runs in browsers and on servers via Node.js. Start with writing simple scripts in your browser console to display messages, manipulate HTML, or perform calculations. Learning step-by-step—syntax, variables, functions, loops—builds a solid foundation for web development and beyond.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=W6NZfCO5SIk" target="_blank">JavaScript Full Course for Beginners</a></p>
+</div>
+
+<div class="lesson" id="variables">
+<h2>Variables</h2>
+<p>Variables store data values in your program. Use <code>let</code>, <code>const</code>, or <code>var</code> to declare them: <code>let name = "Alex"; const age = 16;</code>. Variables allow storing strings, numbers, objects, or arrays. Understanding scope (block, function, global) is essential for maintaining proper variable behavior in programs.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=Ukg_U3CnJWI" target="_blank">JavaScript Variables Tutorial</a></p>
+</div>
+
+<div class="lesson" id="functions">
+<h2>Functions</h2>
+<p>Functions are reusable blocks of code. Define them with <code>function</code> or arrow syntax: <code>function greet(name){ console.log("Hello " + name); }</code> or <code>const greet = (name) =&gt; console.log("Hello " + name);</code>. Call them with arguments and return values as needed. Functions help organize code and enable reuse.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=H1al5K9OHo0" target="_blank">JavaScript Functions Tutorial</a></p>
+</div>
+
+<div class="lesson" id="loops">
+<h2>Loops</h2>
+<p>Loops allow repeated execution of code. Use <code>for</code>, <code>while</code>, and <code>for...of</code> loops: <code>for(let i=0;i&lt;5;i++){ console.log(i); }</code>. Loops are fundamental for automating repetitive tasks and iterating over arrays or objects efficiently.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=fi3M5E-mzQ0" target="_blank">JavaScript Loops Tutorial</a></p>
+</div>
+
+<div class="lesson" id="arrays">
+<h2>Arrays</h2>
+<p>Arrays store multiple values in a single variable: <code>let fruits = ["apple","banana","mango"];</code>. Access elements with indices: <code>fruits[0]</code>. Modify arrays with methods like <code>push()</code>, <code>pop()</code>, <code>shift()</code>, <code>unshift()</code>, and loop through them to process data dynamically.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=R8rmfD9Y5-c" target="_blank">JavaScript Arrays Tutorial</a></p>
+</div>
+
+<div class="lesson" id="objects">
+<h2>Objects</h2>
+<p>Objects store key-value pairs: <code>let person = {name:"Alex", age:16};</code>. Access properties using dot notation or brackets: <code>person.name</code> or <code>person["age"]</code>. Objects are essential for structuring data in JavaScript applications.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=FO5p0uz9XbA" target="_blank">JavaScript Objects Tutorial</a></p>
+</div>
+
+<div class="lesson" id="dom">
+<h2>DOM Manipulation</h2>
+<p>DOM (Document Object Model) represents HTML as objects that can be manipulated via JavaScript. Select elements using <code>document.getElementById</code>, <code>querySelector</code>, or <code>querySelectorAll</code>, then change content, styles, or attributes dynamically.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=0ik6X4DJKCc" target="_blank">JavaScript DOM Tutorial</a></p>
+</div>
+
+<div class="lesson" id="events">
+<h2>Events</h2>
+<p>Events respond to user actions like clicks, input, or hover. Use <code>element.addEventListener("click",function(){})</code> to trigger code when events occur. Mastering events makes interactive web applications possible.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=XF1_MlZ5l6I" target="_blank">JavaScript Events Tutorial</a></p>
+</div>
+
+<div class="lesson" id="es6">
+<h2>ES6 Features</h2>
+<p>ES6 introduced modern JavaScript features like <code>let</code>, <code>const</code>, arrow functions, template literals, destructuring, classes, modules, and promises. Learning ES6 improves code readability and aligns with current JavaScript standards.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=NCwa_xi0Uuc" target="_blank">JavaScript ES6 Tutorial</a></p>
+</div>
+
+<div class="lesson" id="fetch">
+<h2>Fetch API</h2>
+<p>Fetch API allows asynchronous requests to servers: <code>fetch('url').then(response =&gt; response.json()).then(data =&gt; console.log(data))</code>. Use it to retrieve or send data dynamically without reloading the page.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=cuEtnrL9-H0" target="_blank">JavaScript Fetch API Tutorial</a></p>
+</div>
+
+<div class="lesson" id="async">
+<h2>Async/Await</h2>
+<p>Async/Await simplifies handling asynchronous operations. Define functions with <code>async</code> and use <code>await</code> for promises: <code>async function getData(){ let res = await fetch(url); let data = await res.json(); }</code>. This approach makes code cleaner and easier to read.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=PoRJizFvM7s" target="_blank">JavaScript Async/Await Tutorial</a></p>
+</div>
+
+<div class="lesson" id="projects">
+<h2>Mini Projects</h2>
+<p>Mini-projects let you practice JavaScript skills. Build small projects like a calculator, to-do list, or quiz app. Break tasks into functions, test frequently, and debug. Gradually tackle bigger projects like API-based apps or interactive games. Hands-on practice strengthens understanding and builds confidence.</p>
+<p>🎥 Tutorial: <a href="https://www.youtube.com/watch?v=H1Yd7upQsXY" target="_blank">JavaScript Mini Projects Tutorial</a></p>
+</div>
+
+<div class="lesson" id="resources">
+<h2>Additional Resources</h2>
+<p>Learn JavaScript through tutorials, interactive platforms, and documentation: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN JavaScript Docs</a>, <a href="https://www.w3schools.com/js/" target="_blank">W3Schools JS</a>, <a href="https://javascript.info/" target="_blank">JavaScript.info</a>, <a href="https://www.freecodecamp.org/" target="_blank">FreeCodeCamp JavaScript</a>. These resources provide exercises, examples, and step-by-step learning paths.</p>
+</div>
+
+</div>
+</body>
+</html>
